@@ -12,7 +12,7 @@ class AmazonprojectSpider(scrapy.Spider):
     lua = """
         function main(splash,args)
             splash:go(args.url)
-            splash:wait(2)
+            splash:wait(7)
             return splash:html()
         end
     """
@@ -43,6 +43,7 @@ class AmazonprojectSpider(scrapy.Spider):
         data_lst = [brand,price,desc,shop,shop_url]
         for i in range(len(data_lst)):
             item[storage_lst[i]] = data_lst[i]
+        # print(item)
         return item
 
 

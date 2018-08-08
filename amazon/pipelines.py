@@ -76,7 +76,9 @@ class MongoPipeline(object):
         count = self.redis.llen('list')
         for i in range(count):
             s = self.redis.rpop('list').decode()
-            data = json.loads(s)
+            data = re.sub("\'\s+?\'", " ", s)
+            data = re.sub('\'', '\"', data)
+            data = json.loads(data)
             self.coll.insert(data)
         return item
 
